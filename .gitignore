@@ -1,0 +1,26 @@
+# --- Python ---
+__pycache__/
+*.py[oc]
+build/
+dist/
+wheels/
+*.egg-info
+.venv
+
+# --- Environnement / secrets ---
+.env
+
+# --- Node / frontend ---
+node_modules/
+npm-debug.log*
+
+# --- Fichiers générés par Django / Vite ---
+staticfiles/
+static/dist/
+db.sqlite3
+
+# --- Fichiers d'OS / éditeurs ---
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/

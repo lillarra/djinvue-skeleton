@@ -1,0 +1,25 @@
+{% extends inertia_layout %}
+{% load inertia_extras %}
+
+{% comment %}
+Surcharge volontaire du template "inertia.html" fourni par le paquet
+inertia-django (Django cherche d'abord dans notre propre dossier
+templates/ avant celui du package, voir TEMPLATES["DIRS"] dans
+config/settings.py).
+
+Pourquoi : le paquet Python inertia-django ne génère toujours que
+l'ancien format `<div id="app" data-page="...">`. Or @inertiajs/vue3 v3
+a supprimé la lecture de cet attribut : son client ne cherche plus que
+`<script data-page="app" type="application/json">`. Sans cette
+surcharge, l'app Vue ne se monte jamais avec @inertiajs/vue3 en v3
+(page blanche). Voir le README, section "Pièges connus", pour le détail
+et les sources.
+
+À supprimer si une future version d'inertia-django génère nativement ce
+format (vérifier son fichier inertia/templates/inertia.html en amont).
+{% endcomment %}
+
+{% block inertia %}
+  <script data-page="app" type="application/json">{{ page|script_json }}</script>
+  <div id="app"></div>
+{% endblock inertia %}

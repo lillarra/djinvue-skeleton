@@ -1,0 +1,4 @@
+/* Feuille de style globale. Tailwind v4 est "CSS-first" : plus besoin de
+   tailwind.config.js, tout se configure ici directement. */
+@import "tailwindcss";
+@plugin "daisyui";
