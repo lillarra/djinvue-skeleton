@@ -38,7 +38,7 @@ uv run python -c "from django.core.management.utils import get_random_secret_key
 # 4. Créer la base PostgreSQL (adapter selon votre installation)
 psql -U postgres -h localhost -p 5432 -c "CREATE DATABASE yproject;"
 
-# 5. Appliquer les migrations (crée aussi les 3 notes de démo, voir demo/migrations/0002_seed_notes.py)
+# 5. Appliquer les migrations (crée aussi les 3 notes de démo, voir apps/demo/migrations/0002_seed_notes.py)
 uv run manage.py migrate
 
 # 6. (optionnel) Créer un compte admin pour /admin
@@ -63,7 +63,7 @@ lui qu'on visite : Django sert les pages et charge les assets Vite via `django-v
 ## Build de production
 
 ```bash
-npm run build              # build les assets dans static/dist/
+npm run build              # build les assets dans frontend/dist/
 uv run manage.py collectstatic --noinput
 ```
 
@@ -73,14 +73,37 @@ Avec `DJANGO_DEBUG=False` dans `.env`, django-vite bascule automatiquement en le
 ## Structure du projet
 
 ```
-config/            réglages Django, urls racine
-accounts/           authentification native Django + partage de l'utilisateur courant (Inertia)
-demo/                page publique de démonstration (lit des données PostgreSQL)
-todos/               CRUD de démonstration, protégé par authentification (voir plus bas)
-templates/base.html  layout HTML racine (INERTIA_LAYOUT)
-frontend/            code source JS/Vue (Pages, Layouts, Components, entry.js, css)
-static/dist/         build Vite (généré, ignoré par git)
+manage.py, pyproject.toml, package.json, vite.config.js, .env*    à la racine (outillage)
+
+config/                          projet Django : rien de spécifique à une app métier
+├── settings.py, urls.py, wsgi.py, asgi.py, utils.py (parse_body, form_errors)
+└── templates/                    base.html (layout racine) + inertia.html (surcharge Inertia v3)
+
+apps/                             toutes les apps Django "métier"
+├── accounts/                     authentification native Django + partage de l'utilisateur (Inertia)
+├── demo/                         page publique de démonstration (lit des données PostgreSQL)
+└── todos/                        CRUD de démonstration, protégé par authentification (voir plus bas)
+
+frontend/                         tout le JS/Vue, y compris son build
+├── src/                          TOUT le code source (organisé par type, puis par domaine)
+│   ├── entry.js                   amorce Vue + Inertia
+│   ├── css/                       styles globaux (Tailwind/DaisyUI)
+│   ├── layouts/                   gabarits transverses (AppLayout.vue)
+│   ├── components/shared/         composants transverses (Navbar.vue)
+│   └── pages/                     miroir des apps Django : accounts/, demo/, todos/
+└── dist/                         build Vite (généré, ignoré par git)
 ```
+
+Le dossier `frontend/src/pages/` reflète les apps Django par convention de nommage
+(`apps/accounts` ↔ `pages/accounts/`, etc.) : la chaîne de composant passée par chaque vue Django
+(ex. `render(request, "accounts/Login", ...)`) doit correspondre exactement au chemin en
+minuscules sous `pages/`, résolu par `import.meta.glob` dans `frontend/src/entry.js`.
+
+Racine volontairement minimale : à part les fichiers de config (Python/JS/Vite/env), seuls 3
+dossiers portent du sens — `config/` (projet Django), `apps/` (apps métier Django) et `frontend/`
+(tout le JS/Vue, y compris son propre build). `node_modules/` et `.venv/` restent à la racine par
+convention (identique à Laravel + Inertia, la stack de référence) : ce sont de l'outillage, pas du
+code métier.
 
 ## Pièges connus (à lire avant de faire évoluer ce skeleton)
 
@@ -95,11 +118,11 @@ static/dist/         build Vite (généré, ignoré par git)
   (reading 'component')`).
 
   **Solution appliquée ici** : on surcharge le template `inertia.html` fourni par le paquet
-  `inertia` (Django cherche d'abord dans notre propre dossier `templates/`, déclaré dans `DIRS`,
-  avant celui du package via `APP_DIRS` — voir `TEMPLATES` dans `config/settings.py`).
-  - `templates/inertia.html` : génère la nouvelle balise `<script>` au lieu de l'attribut `data-page`.
-  - `accounts/templatetags/inertia_extras.py` : filtre `script_json` qui échappe les `/` en `\/`
-    dans le JSON avant de l'insérer dans le `<script>` — exactement la technique utilisée par
+  `inertia` (Django cherche d'abord dans notre propre dossier `config/templates/`, déclaré dans
+  `DIRS`, avant celui du package via `APP_DIRS` — voir `TEMPLATES` dans `config/settings.py`).
+  - `config/templates/inertia.html` : génère la nouvelle balise `<script>` au lieu de l'attribut `data-page`.
+  - `apps/accounts/templatetags/inertia_extras.py` : filtre `script_json` qui échappe les `/` en
+    `\/` dans le JSON avant de l'insérer dans le `<script>` — exactement la technique utilisée par
     `@inertiajs/vue3` lui-même pour son propre rendu SSR (voir
     `node_modules/@inertiajs/vue3/dist/index.js`, recherche `useScriptElementForInitialPage`).
     Le filtre `|escape` standard de Django ne convient pas ici : le contenu d'un `<script>` n'est
@@ -112,15 +135,15 @@ static/dist/         build Vite (généré, ignoré par git)
   serveur Django est nécessaire — l'autoreload de `runserver` ne le détecte pas toujours.
 - **Les formulaires Inertia envoient du JSON**, pas du `application/x-www-form-urlencoded` :
   `request.POST` reste vide. D'où l'utilitaire `config/utils.py::parse_body(request)`, utilisé
-  partout où l'on construit un `Form` Django à partir d'une requête (voir `accounts/views.py`,
-  `todos/views.py`).
+  partout où l'on construit un `Form` Django à partir d'une requête (voir `apps/accounts/views.py`,
+  `apps/todos/views.py`).
 - **CSRF** : `CSRF_COOKIE_NAME`/`CSRF_HEADER_NAME` sont alignés dans `config/settings.py` sur ce
   qu'attend le client Inertia (convention Laravel `XSRF-TOKEN` / `X-XSRF-TOKEN`), pour éviter
   d'avoir à configurer quoi que ce soit côté JS.
 - **Commentaires Django multi-lignes** : le tag `{# ... #}` ne supporte **pas** plusieurs lignes
   (il n'est alors pas du tout traité comme un commentaire et s'affiche tel quel dans le HTML rendu).
   Utiliser `{% comment %}...{% endcomment %}` pour tout commentaire de template sur plusieurs
-  lignes (voir `templates/base.html`).
+  lignes (voir `config/templates/base.html`).
 - **CORS sur les assets Vite en dev** : la page est servie par Django (`:8500`) mais charge des
   scripts `type="module"` depuis Vite (`:5173`) — une origine différente. Un script module
   cross-origin est chargé en mode CORS par le navigateur ; sans `server.cors: true` dans
@@ -129,16 +152,16 @@ static/dist/         build Vite (généré, ignoré par git)
 
 ## Réutiliser ce skeleton / repartir de zéro
 
-Le CRUD Todo (`todos/`) n'existe que pour prouver que l'authentification + CRUD + isolation par
-utilisateur fonctionnent. Pour repartir d'un skeleton vierge, supprimer :
+Le CRUD Todo (`apps/todos/`) n'existe que pour prouver que l'authentification + CRUD + isolation
+par utilisateur fonctionnent. Pour repartir d'un skeleton vierge, supprimer :
 
-1. Le dossier `todos/`
-2. Le dossier `frontend/Pages/Todos/`
-3. `"todos"` dans `INSTALLED_APPS` (`config/settings.py`)
-4. La ligne `path("", include("todos.urls"))` dans `config/urls.py`
-5. Le lien "Todos" dans `frontend/Components/Navbar.vue`
+1. Le dossier `apps/todos/`
+2. Le dossier `frontend/src/pages/todos/` (et `frontend/src/components/todos/` s'il existe)
+3. `"apps.todos"` dans `INSTALLED_APPS` (`config/settings.py`)
+4. La ligne `path("", include("apps.todos.urls"))` dans `config/urls.py`
+5. Le lien "Todos" dans `frontend/src/components/shared/Navbar.vue`
 6. Une fois `todos` supprimée, `config/utils.py::form_errors` reste utilisé par `accounts` — rien
    à faire de ce côté.
 
-La page démo (`demo/`) et l'authentification (`accounts/`) sont le socle du skeleton : à garder
-(et personnaliser) pour un nouveau projet.
+La page démo (`apps/demo/`) et l'authentification (`apps/accounts/`) sont le socle du skeleton : à
+garder (et personnaliser) pour un nouveau projet.

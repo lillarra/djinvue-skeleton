@@ -16,8 +16,8 @@ def register(request):
             user = form.save()
             login(request, user)
             return redirect("demo-index")
-        return render(request, "Auth/Register", props={"errors": form_errors(form)})
-    return render(request, "Auth/Register", props={"errors": {}})
+        return render(request, "accounts/Register", props={"errors": form_errors(form)})
+    return render(request, "accounts/Register", props={"errors": {}})
 
 
 def login_view(request):
@@ -26,8 +26,8 @@ def login_view(request):
         if form.is_valid():
             login(request, form.get_user())
             return redirect("demo-index")
-        return render(request, "Auth/Login", props={"errors": form_errors(form)})
-    return render(request, "Auth/Login", props={"errors": {}})
+        return render(request, "accounts/Login", props={"errors": form_errors(form)})
+    return render(request, "accounts/Login", props={"errors": {}})
 
 
 @require_POST

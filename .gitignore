@@ -16,7 +16,7 @@ npm-debug.log*
 
 # --- Fichiers générés par Django / Vite ---
 staticfiles/
-static/dist/
+frontend/dist/
 db.sqlite3
 
 # --- Fichiers d'OS / éditeurs ---

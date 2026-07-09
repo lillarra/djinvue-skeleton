@@ -6,8 +6,8 @@ class Todo(models.Model):
     """CRUD de démonstration — app volontairement isolée et facilement
     supprimable une fois les tests terminés. Pour repartir d'un skeleton
     vierge, voir le README (section "Supprimer le CRUD Todo") : retirer ce
-    dossier todos/, sa ligne dans INSTALLED_APPS et dans config/urls.py,
-    le dossier frontend/Pages/Todos/, et le lien "Todos" dans Navbar.vue.
+    dossier apps/todos/, sa ligne dans INSTALLED_APPS et dans config/urls.py,
+    le dossier frontend/src/pages/todos/, et le lien "Todos" dans Navbar.vue.
     """
 
     user = models.ForeignKey(

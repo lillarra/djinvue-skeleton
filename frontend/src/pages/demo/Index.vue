@@ -1,8 +1,8 @@
 <script setup>
 // Page publique : prouve la chaîne complète Django -> Inertia -> Vue ->
-// PostgreSQL. Les notes arrivent en prop directement depuis demo/views.py,
-// aucune requête AJAX manuelle n'est nécessaire.
-import AppLayout from "../../Layouts/AppLayout.vue";
+// PostgreSQL. Les notes arrivent en prop directement depuis
+// apps/demo/views.py, aucune requête AJAX manuelle n'est nécessaire.
+import AppLayout from "../../layouts/AppLayout.vue";
 
 defineProps({
   notes: { type: Array, default: () => [] },

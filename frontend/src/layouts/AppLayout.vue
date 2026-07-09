@@ -1,8 +1,8 @@
 <script setup>
 // Layout réutilisable : toute page qui l'utilise hérite de la navbar et
-// d'un conteneur centré/responsive. Voir frontend/Pages/Demo/Index.vue
+// d'un conteneur centré/responsive. Voir frontend/src/pages/demo/Index.vue
 // pour un exemple d'utilisation.
-import Navbar from "../Components/Navbar.vue";
+import Navbar from "../components/shared/Navbar.vue";
 </script>
 
 <template>

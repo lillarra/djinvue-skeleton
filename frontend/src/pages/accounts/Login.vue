@@ -1,6 +1,6 @@
 <script setup>
 import { useForm } from "@inertiajs/vue3";
-import AppLayout from "../../Layouts/AppLayout.vue";
+import AppLayout from "../../layouts/AppLayout.vue";
 
 defineProps({
   errors: { type: Object, default: () => ({}) },

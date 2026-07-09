@@ -1,8 +1,8 @@
 // Config Vite du projet. Le rôle de Vite ici est double :
-//  - en dev : servir frontend/entry.js avec Hot Module Replacement (HMR)
-//    sur http://localhost:5173, lu par Django via django-vite ;
+//  - en dev : servir frontend/src/entry.js avec Hot Module Replacement
+//    (HMR) sur http://localhost:5173, lu par Django via django-vite ;
 //  - en prod : construire (`npm run build`) un bundle buildé dans
-//    static/dist/, accompagné d'un manifest.json que django-vite lit pour
+//    frontend/dist/, accompagné d'un manifest.json que django-vite lit pour
 //    savoir quels fichiers (hashés) injecter dans le HTML.
 import { defineConfig } from "vite";
 import vue from "@vitejs/plugin-vue";
@@ -18,11 +18,11 @@ export default defineConfig({
   build: {
     // Dossier de sortie du build, lu par STATICFILES_DIRS et par
     // DJANGO_VITE (manifest_path) dans config/settings.py.
-    outDir: "static/dist",
+    outDir: "frontend/dist",
     emptyOutDir: true,
     manifest: true,
     rollupOptions: {
-      input: "frontend/entry.js",
+      input: "frontend/src/entry.js",
     },
   },
 

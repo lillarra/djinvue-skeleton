@@ -3,7 +3,7 @@ from inertia import inertia
 from .models import Note
 
 
-@inertia("Demo/Index")
+@inertia("demo/Index")
 def index(request):
     # .values(...) plutôt que de passer le QuerySet tel quel : ça donne un
     # contrôle explicite sur les champs envoyés au frontend (le "id" est

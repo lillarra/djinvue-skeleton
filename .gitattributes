@@ -1,0 +1,53 @@
+# Normalisation des fins de ligne
+# Par défaut : Git détecte le contenu texte et force LF dans le dépôt
+# (à la fois au commit et au checkout, sur toutes les machines).
+* text=auto eol=lf
+
+# --- Fichiers texte : LF explicite ---
+# Redondant avec la règle ci-dessus, mais explicite = plus lisible,
+# et protège les extensions sensibles (scripts shell notamment).
+
+# Python / backend
+*.py    text eol=lf
+*.pyi   text eol=lf
+
+# JavaScript / Vue / frontend
+*.js    text eol=lf
+*.mjs   text eol=lf
+*.cjs   text eol=lf
+*.vue   text eol=lf
+*.jsx   text eol=lf
+*.ts    text eol=lf
+*.css   text eol=lf
+*.scss  text eol=lf
+*.html  text eol=lf
+*.json  text eol=lf
+
+# Config / doc
+*.toml  text eol=lf
+*.yml   text eol=lf
+*.yaml  text eol=lf
+*.md    text eol=lf
+*.txt   text eol=lf
+*.env   text eol=lf
+*.cfg   text eol=lf
+*.ini   text eol=lf
+
+# Scripts shell : LF OBLIGATOIRE (un CRLF les casse sous Linux)
+*.sh    text eol=lf
+
+# --- Fichiers binaires : Git ne doit JAMAIS toucher aux fins de ligne ---
+# Sans ça, la normalisation pourrait corrompre ces fichiers.
+*.png   binary
+*.jpg   binary
+*.jpeg  binary
+*.gif   binary
+*.webp  binary
+*.ico   binary
+*.svg   text eol=lf
+*.pdf   binary
+*.woff  binary
+*.woff2 binary
+*.ttf   binary
+*.eot   binary
+*.zip   binary

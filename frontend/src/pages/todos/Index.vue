@@ -1,9 +1,12 @@
 <script setup>
-// CRUD de démonstration (voir todos/models.py pour comment le supprimer
-// proprement plus tard). Page protégée par @login_required côté Django :
-// on n'y arrive jamais sans être connecté.
+// CRUD de démonstration (voir apps/todos/models.py pour comment le
+// supprimer proprement plus tard, y compris ce dossier
+// frontend/src/pages/todos/). Page protégée par @login_required côté
+// Django : on n'y arrive jamais sans être connecté.
+// Si des composants dédiés aux todos sont extraits un jour, les mettre
+// dans frontend/src/components/todos/ (miroir de apps/todos).
 import { Link, useForm, router } from "@inertiajs/vue3";
-import AppLayout from "../../Layouts/AppLayout.vue";
+import AppLayout from "../../layouts/AppLayout.vue";
 
 defineProps({
   todos: { type: Array, default: () => [] },

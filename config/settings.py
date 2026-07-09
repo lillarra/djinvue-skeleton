@@ -48,10 +48,10 @@ INSTALLED_APPS = [
     # Librairies tierces
     "django_vite",
     "inertia",
-    # Apps du projet
-    "accounts",
-    "demo",
-    "todos",
+    # Apps du projet (regroupées sous apps/, voir apps/accounts, apps/demo, apps/todos)
+    "apps.accounts",
+    "apps.demo",
+    "apps.todos",
 ]
 
 MIDDLEWARE = [
@@ -61,9 +61,9 @@ MIDDLEWARE = [
     "django.middleware.csrf.CsrfViewMiddleware",
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     # Partage l'utilisateur courant à toutes les pages Inertia (voir
-    # accounts/middleware.py) : doit passer après AuthenticationMiddleware
+    # apps/accounts/middleware.py) : doit passer après AuthenticationMiddleware
     # pour avoir accès à request.user.
-    "accounts.middleware.inertia_share",
+    "apps.accounts.middleware.inertia_share",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
     "inertia.middleware.InertiaMiddleware",
@@ -74,7 +74,7 @@ ROOT_URLCONF = "config.urls"
 TEMPLATES = [
     {
         "BACKEND": "django.template.backends.django.DjangoTemplates",
-        "DIRS": [BASE_DIR / "templates"],
+        "DIRS": [BASE_DIR / "config" / "templates"],
         "APP_DIRS": True,
         "OPTIONS": {
             "context_processors": [
@@ -89,8 +89,10 @@ TEMPLATES = [
 WSGI_APPLICATION = "config.wsgi.application"
 
 
-# Modèle utilisateur custom (voir accounts/models.py) : à définir avant la
-# toute première migration, car il est quasi impossible à changer après.
+# Modèle utilisateur custom (voir apps/accounts/models.py) : à définir avant
+# la toute première migration, car il est quasi impossible à changer après.
+# Reste "accounts.User" (le label d'app est le dernier segment du chemin
+# Python "apps.accounts", indépendant de l'emplacement physique du dossier).
 AUTH_USER_MODEL = "accounts.User"
 
 
@@ -141,9 +143,9 @@ USE_TZ = True
 
 STATIC_URL = "static/"
 
-# static/dist est le dossier de build de Vite (voir vite.config.js) : c'est
+# frontend/dist est le dossier de build de Vite (voir vite.config.js) : c'est
 # là que collectstatic ira chercher les assets buildés en prod.
-STATICFILES_DIRS = [BASE_DIR / "static" / "dist"]
+STATICFILES_DIRS = [BASE_DIR / "frontend" / "dist"]
 
 # Dossier où `collectstatic` rassemble tous les fichiers statiques pour la
 # prod (assets buildés par Vite inclus). Reste vide en dev.
@@ -172,12 +174,12 @@ CSRF_HEADER_NAME = "HTTP_X_XSRF_TOKEN"
 # --- Configuration django-vite (pont entre Django et le build Vite) -------
 # En dev : DJANGO_VITE["default"]["dev_mode"] = True fait pointer les tags
 # {% vite_asset %} vers le serveur de dev Vite (localhost:5173, avec HMR).
-# En prod : il lit static/dist/manifest.json généré par `npm run build`
+# En prod : il lit frontend/dist/manifest.json généré par `npm run build`
 # pour connaître les noms de fichiers hashés à injecter.
 DJANGO_VITE = {
     "default": {
         "dev_mode": DEBUG,
-        "manifest_path": BASE_DIR / "static" / "dist" / ".vite" / "manifest.json",
+        "manifest_path": BASE_DIR / "frontend" / "dist" / ".vite" / "manifest.json",
     }
 }
 

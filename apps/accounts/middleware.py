@@ -5,7 +5,8 @@ def inertia_share(get_response):
     """Partage l'utilisateur courant à TOUTES les pages Inertia.
 
     `share()` ajoute des props globales, disponibles dans n'importe quel
-    composant Vue via `usePage().props` (voir frontend/Components/Navbar.vue).
+    composant Vue via `usePage().props` (voir
+    frontend/src/components/shared/Navbar.vue).
     On utilise un lambda pour que la requête `request.user` ne soit évaluée
     que si la prop est effectivement consommée côté client (lazy evaluation).
     """

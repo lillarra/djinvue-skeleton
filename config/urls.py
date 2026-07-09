@@ -10,8 +10,8 @@ from django.urls import include, path
 
 urlpatterns = [
     path("admin/", admin.site.urls),
-    path("", include("accounts.urls")),
-    path("", include("demo.urls")),
-    # CRUD Todo, supprimable : voir todos/models.py et le README.
-    path("", include("todos.urls")),
+    path("", include("apps.accounts.urls")),
+    path("", include("apps.demo.urls")),
+    # CRUD Todo, supprimable : voir apps/todos/models.py et le README.
+    path("", include("apps.todos.urls")),
 ]

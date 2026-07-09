@@ -11,7 +11,7 @@ from .models import Todo
 
 def _todos_props(request, errors=None):
     # request.user.todos : grâce au related_name="todos" du FK dans le
-    # modèle (voir todos/models.py). Chaque utilisateur ne voit que les
+    # modèle (voir apps/todos/models.py). Chaque utilisateur ne voit que les
     # siens : c'est ce filtrage, pas une vérification côté frontend, qui
     # garantit l'isolation entre comptes.
     todos = request.user.todos.values("id", "titre", "description", "fait", "cree_le")
@@ -20,7 +20,7 @@ def _todos_props(request, errors=None):
 
 @login_required
 def index(request):
-    return render(request, "Todos/Index", props=_todos_props(request))
+    return render(request, "todos/Index", props=_todos_props(request))
 
 
 @login_required
@@ -31,7 +31,7 @@ def create(request):
         todo.user = request.user
         todo.save()
         return redirect("todos-index")
-    return render(request, "Todos/Index", props=_todos_props(request, form_errors(form)))
+    return render(request, "todos/Index", props=_todos_props(request, form_errors(form)))
 
 
 @login_required
@@ -44,10 +44,10 @@ def edit(request, pk):
             return redirect("todos-index")
         return render(
             request,
-            "Todos/Edit",
+            "todos/Edit",
             props={"todo": _serialize(todo), "errors": form_errors(form)},
         )
-    return render(request, "Todos/Edit", props={"todo": _serialize(todo), "errors": {}})
+    return render(request, "todos/Edit", props={"todo": _serialize(todo), "errors": {}})
 
 
 @login_required
