@@ -17,7 +17,7 @@ function logout() {
 <template>
   <div class="navbar bg-base-100 shadow-sm">
     <div class="flex-1">
-      <Link href="/" class="btn btn-ghost text-xl">Y Project</Link>
+      <Link href="/" class="btn btn-ghost text-xl">Djinvue Skeleton</Link>
     </div>
 
     <!-- Menu mobile (dropdown) : visible seulement sous md, pour un rendu

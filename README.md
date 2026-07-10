@@ -1,4 +1,4 @@
-# Y Project — squelette Django + Inertia + Vue 3
+# Djinvue Skeleton — squelette Django + Inertia + Vue 3
 
 Squelette de démarrage pour une stack **Django + Inertia.js + Vue 3 (Composition API) + Vite +
 Tailwind CSS + DaisyUI + PostgreSQL**, sans SSR. Pensé pour être réutilisé comme base de départ

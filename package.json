@@ -1,5 +1,5 @@
 {
-  "name": "y-project",
+  "name": "djinvue-skeleton",
   "version": "1.0.0",
   "private": true,
   "description": "Squelette Django + Inertia + Vue 3",
