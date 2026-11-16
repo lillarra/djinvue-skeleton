@@ -15,6 +15,8 @@ demo CRUD proving auth + per-user isolation work — it's meant to be deleted wh
 this skeleton for a real project (see README's "Réutiliser ce skeleton" section for the exact
 removal checklist). `apps/demo/` and `apps/accounts/` are the permanent skeleton core.
 
+The validated project specification (« Djin propre », in French) is [docs/cahier-des-charges.md](docs/cahier-des-charges.md) — it describes the target state, which may differ from what this file documents today; read it before any structural change.
+
 ## Conventions
 
 - **Language**: all comments and documentation (docstrings, README, .env.example) are in French.
