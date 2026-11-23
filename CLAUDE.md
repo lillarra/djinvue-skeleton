@@ -24,6 +24,7 @@ The validated project specification (« Djin propre », in French) is [docs/cahi
   and Django identifiers are all English. French is for prose written for humans, not identifiers.
 - **Line endings**: LF (never CRLF) for all text files. The root `.gitattributes` enforces and
   guarantees this normalization on every machine.
+- **Variables de réglages** : un préfixe par domaine, pour les cibler facilement. Par exemple DJANGO_AUTH_ pour l'authentification (DJANGO_AUTH_REGISTRATION_ENABLED), DJANGO_ADMIN_ pour l'admin.
 
 ## Commands
 

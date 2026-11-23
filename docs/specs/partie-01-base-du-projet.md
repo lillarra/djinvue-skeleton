@@ -6,7 +6,7 @@ les autres parts s'appuient. L'assistant de configuration (partie 2)
 automatisera sa mise en place plus tard.
 
 ## Une fois finie, je peux
-- lancer le projet sous Python 3.12 ou plus et Django 5.2 LTS ;
+- lancer le projet sous des versions maintenues de Python et de Django ;
 - le relier à sa base de données en remplissant le fichier .env à la
   main, à partir d'un fichier d'exemple ;
 - me connecter et me déconnecter ;
@@ -26,7 +26,7 @@ configuration ; le nettoyage de l'existant ; le système de tests
 complet.
 
 ## Critères de fin
-- Des tests Django, lancés avec l'outil intégré, couvrent tout ce qui
+- Des tests automatiques couvrent tout ce qui
   figure dans « Une fois finie, je peux », sauf la version de Python.
 - Une liste de vérification manuelle accompagne chaque tâche :
   prérequis, actions, résultat attendu.

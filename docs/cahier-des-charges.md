@@ -1,5 +1,7 @@
 # Cahier des charges « Djin propre »
 
+Le comment noté ici est une trace des réflexions ; il se revérifie au moment d'agir.
+
 Validé le 16/11/2026.
 
 ## Vision
@@ -10,7 +12,7 @@ Un projet Djin est un monolithe Django. Les pages sont définies par les vues Dj
 
 ## Stack
 
-- Python 3.12 ou plus, Django 5.2 LTS.
+- Python 3.15, Django 6.1.
     - Note : la prochaine LTS, 6.2, est attendue en avril 2027.
 - inertia-django 2.0, Vue 3, Vite.
 - Tailwind, nécessaire à shadcn-vue. DaisyUI sort.
