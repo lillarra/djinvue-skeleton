@@ -97,7 +97,7 @@ AUTH_USER_MODEL = "accounts.User"
 
 
 # Database
-# https://docs.djangoproject.com/en/5.2/ref/settings/#databases
+# https://docs.djangoproject.com/en/6.1/ref/settings/#databases
 # DATABASE_URL suit le format standard 12-factor :
 #   postgres://USER:PASSWORD@HOST:PORT/NOM_DE_LA_BASE
 # ce qui rend la config triviale à reprendre telle quelle dans un futur
@@ -108,7 +108,7 @@ DATABASES = {
 
 
 # Password validation
-# https://docs.djangoproject.com/en/5.2/ref/settings/#auth-password-validators
+# https://docs.djangoproject.com/en/6.1/ref/settings/#auth-password-validators
 
 AUTH_PASSWORD_VALIDATORS = [
     {
@@ -127,7 +127,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 
 # Internationalization
-# https://docs.djangoproject.com/en/5.2/topics/i18n/
+# https://docs.djangoproject.com/en/6.1/topics/i18n/
 
 LANGUAGE_CODE = "fr-fr"
 
@@ -139,7 +139,7 @@ USE_TZ = True
 
 
 # Static files (CSS, JavaScript, Images)
-# https://docs.djangoproject.com/en/5.2/howto/static-files/
+# https://docs.djangoproject.com/en/6.1/howto/static-files/
 
 STATIC_URL = "static/"
 
@@ -157,7 +157,7 @@ LOGOUT_REDIRECT_URL = "/"
 LOGIN_URL = "/login"
 
 # Default primary key field type
-# https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field
+# https://docs.djangoproject.com/en/6.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 

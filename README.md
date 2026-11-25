@@ -18,8 +18,11 @@ sensible/variable passe par des variables d'environnement.
 ## Prérequis
 
 - [uv](https://docs.astral.sh/uv/getting-started/installation/) installé
+- Python 3.15, installé avec uv : `uv python install 3.15` (à faire avant `uv sync`, surtout si
+  les téléchargements automatiques de Python sont coupés)
 - Node.js + npm
-- PostgreSQL accessible (en local via Laragon, Postgres.app, etc.)
+- PostgreSQL 15 ou plus (exigé par Django 6.1), accessible (en local via Laragon, Postgres.app,
+  etc.)
 
 ## Installation
 

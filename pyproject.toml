@@ -8,7 +8,7 @@ dependencies = [
     "django-environ>=0.14.0",
     "django-vite>=3.1.0",
     "inertia-django>=1.2.0",
-    "psycopg[binary]>=3.3.4",
+    "psycopg[binary]>=3.3.6",
 ]
 
 # 99 caractères (plutôt que les 79 de PEP8) : évite de casser artificiellement
