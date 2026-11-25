@@ -25,6 +25,7 @@ The validated project specification (« Djin propre », in French) is [docs/cahi
 - **Line endings**: LF (never CRLF) for all text files. The root `.gitattributes` enforces and
   guarantees this normalization on every machine.
 - **Variables de réglages** : un préfixe par domaine, pour les cibler facilement. Par exemple DJANGO_AUTH_ pour l'authentification (DJANGO_AUTH_REGISTRATION_ENABLED), DJANGO_ADMIN_ pour l'admin.
+- **Messages de commit** : aucune ligne `Co-Authored-By`, `Claude-Session` ni « Generated with Claude Code ».
 
 ## Commands
 
