@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## What this is
 
-A reusable starter skeleton for a **Django 5.2 LTS + Inertia.js + Vue 3** stack (no SSR): Django serves
+A reusable starter skeleton for a **Django 6.1 + Inertia.js + Vue 3** stack (no SSR): Django serves
 pages via `inertia-django`, Vue 3 (Composition API, JS only, no TypeScript) renders them, Vite
 handles the frontend build, styling is Tailwind v4 (CSS-first) + DaisyUI v5, PostgreSQL is the
 database. Config is 100% env-driven via `django-environ` (see `.env.example`) so it's trivial
@@ -40,7 +40,7 @@ uv run manage.py collectstatic --noinput
 uv run manage.py migrate
 uv run manage.py makemigrations <app_label>   # e.g. accounts, demo, todos (not apps.accounts)
 uv run manage.py check
-uv run manage.py test             # Django's test runner (no tests written yet — boilerplate only)
+uv run manage.py test             # Django's test runner
 ```
 
 Visit `http://localhost:8500` (not 5173 — Django serves the pages and pulls Vite assets via

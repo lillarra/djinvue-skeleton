@@ -7,7 +7,7 @@ sensible/variable passe par des variables d'environnement.
 
 ## Stack
 
-- **Backend** : Django 5.2 LTS, gestion des dépendances avec [uv](https://docs.astral.sh/uv/)
+- **Backend** : Django 6.1, gestion des dépendances avec [uv](https://docs.astral.sh/uv/)
 - **Pont front/back** : [Inertia.js](https://inertiajs.com/) (`inertia-django` côté serveur,
   `@inertiajs/vue3` côté client)
 - **Frontend** : Vue 3 (Composition API, JavaScript, pas de TypeScript)
