@@ -39,7 +39,7 @@ cp .env.example .env
 uv run python -c "from django.core.management.utils import get_random_secret_key; print(get_random_secret_key())"
 
 # 4. Créer la base PostgreSQL (adapter selon votre installation)
-psql -U postgres -h localhost -p 5432 -c "CREATE DATABASE yproject;"
+psql -U postgres -h localhost -p 5432 -c "CREATE DATABASE djin;"
 
 # 5. Appliquer les migrations (crée aussi les 3 notes de démo, voir apps/demo/migrations/0002_seed_notes.py)
 uv run manage.py migrate
