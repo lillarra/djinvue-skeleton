@@ -35,7 +35,8 @@ npm install
 
 # 3. Config d'environnement
 cp .env.example .env
-# Éditer .env : générer une SECRET_KEY et renseigner DATABASE_URL, par exemple :
+# Éditer .env : renseigner DATABASE_URL (format décrit dans .env.example) et
+# DJANGO_SECRET_KEY, générée avec :
 uv run python -c "from django.core.management.utils import get_random_secret_key; print(get_random_secret_key())"
 
 # 4. Créer la base PostgreSQL (adapter selon votre installation)

@@ -27,6 +27,9 @@ def find_env_calls():
 
     L'analyse porte sur l'arbre syntaxique : les commentaires sont ignorés
     et un appel écrit sur plusieurs lignes est reconnu.
+
+    Limite : les lectures faites autrement (os.environ, os.getenv,
+    env.ENVIRON[...]) ou hors de settings.py ne sont pas relevées.
     """
     tree = ast.parse(SETTINGS_PATH.read_text(encoding="utf-8"))
     calls = []
